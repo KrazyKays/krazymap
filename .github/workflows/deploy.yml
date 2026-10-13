@@ -14,6 +14,11 @@ on:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pages: write
+      id-token: write
+      actions: write
     
     steps:
     - name: Checkout repository
@@ -31,14 +36,13 @@ jobs:
     - name: Build project
       run: npm run build
       
-    - name: Deploy to GitHub Pages
-      uses: peaceiris/actions-gh-pages@v3
+    - name: Configure Pages
+      uses: actions/configure-pages@v4
+      
+    - name: Upload artifact
+      uses: actions/upload-pages-artifact@v3
       with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./dist
-        destination_dir: .
-        keep_files: false
-        force_orphan: true
-        enable_jekyll: false
-        allow_empty_commit: false
-        exclude_assets: '.git,node_modules'
+        path: ./dist
+        
+    - name: Deploy to GitHub Pages
+      uses: actions/deploy-pages@v4
