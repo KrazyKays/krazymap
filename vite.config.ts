@@ -1,18 +1,11 @@
 import { defineConfig } from 'vite';
-import { resolve } from 'path';
-import { fileURLToPath } from 'url';
 
-const __dirname = fileURLToPath(new URL('.', import.meta.url));
+const repository = process.env.GITHUB_REPOSITORY?.split('/')[1] ?? 'krazymap';
 
-export default defineConfig({
-  base: '/krazymap/',
-  resolve: {
-    alias: {
-      '@': resolve(__dirname, 'src'),
-    },
-  },
+export default defineConfig(({ command }) => ({
+  base: command === 'build' ? `/${repository}/` : '/',
   build: {
     outDir: 'dist',
     emptyOutDir: true,
   },
-});
+}));
