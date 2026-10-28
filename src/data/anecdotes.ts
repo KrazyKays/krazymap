@@ -1,7 +1,17 @@
 import type { LonLat } from '../geo/projection';
 
+export type Categorie = 'histoire' | 'nature' | 'patrimoine' | 'terroir';
+
+export const CATEGORIES: Record<Categorie, { label: string; emoji: string }> = {
+  histoire: { label: 'Histoire', emoji: '📜' },
+  nature: { label: 'Nature', emoji: '🌿' },
+  patrimoine: { label: 'Patrimoine', emoji: '🏰' },
+  terroir: { label: 'Terroir', emoji: '🧀' },
+};
+
 export interface Anecdote extends LonLat {
   id: string;
+  categorie: Categorie;
   titre: string;
   texte: string;
   lieu: string;
@@ -11,6 +21,7 @@ export interface Anecdote extends LonLat {
 export const ANECDOTES: Anecdote[] = [
   {
     id: 'lascaux',
+    categorie: 'histoire',
     titre: 'La découverte du siècle',
     texte:
       "En septembre 1940, quatre adolescents et leur chien suivent un trou dans le sol de la forêt. Ils découvrent une cavité ornée de peintures vieilles de plus de 15 000 ans.",
@@ -21,6 +32,7 @@ export const ANECDOTES: Anecdote[] = [
   },
   {
     id: 'mont-saint-michel',
+    categorie: 'patrimoine',
     titre: 'Une île qui respire avec la mer',
     texte:
       "Ce rocher couronné d'une abbaye est entouré de sables mouvants. Les marées y sont parmi les plus fortes d'Europe, et la mer peut revenir plus vite qu'un cheval au galop.",
@@ -31,6 +43,7 @@ export const ANECDOTES: Anecdote[] = [
   },
   {
     id: 'carcassonne',
+    categorie: 'patrimoine',
     titre: 'Un château de conte restauré',
     texte:
       "Une cité médiévale entourée de deux enceintes et de 52 tours. Au XIXe siècle, l'architecte Viollet-le-Duc la restaure presque entièrement, toits pointus compris.",
@@ -41,6 +54,7 @@ export const ANECDOTES: Anecdote[] = [
   },
   {
     id: 'pont-du-gard',
+    categorie: 'patrimoine',
     titre: 'Un aqueduc à trois étages',
     texte:
       "Les Romains y font franchir une rivière à un canal d'eau potable sur trois étages d'arches. L'ouvrage dépasse les 40 mètres de haut.",
@@ -51,6 +65,7 @@ export const ANECDOTES: Anecdote[] = [
   },
   {
     id: 'dune-du-pilat',
+    categorie: 'nature',
     titre: 'La plus haute dune d\'Europe',
     texte:
       "Ce monticule de sable s'élève au bord de l'océan, à quelques kilomètres d'un bassin ostréicole. Il avance chaque année de plusieurs mètres vers la forêt.",
@@ -61,6 +76,7 @@ export const ANECDOTES: Anecdote[] = [
   },
   {
     id: 'mont-blanc',
+    categorie: 'nature',
     titre: 'Le toit de l\'Europe occidentale',
     texte:
       "Ce sommet culmine à 4 808 mètres. Il marque la frontière entre deux pays, et les premiers alpinistes qui le gravissent en 1786 s'y rendent par les glaciers.",
@@ -71,6 +87,7 @@ export const ANECDOTES: Anecdote[] = [
   },
   {
     id: 'cap-gris-nez',
+    categorie: 'nature',
     titre: 'Le point le plus proche de Londres',
     texte:
       "Par temps clair, on voit depuis cette falaise de la Côte d'Opale les falaises du pays voisin. La Manche n'y mesure que 33 kilomètres de large.",
@@ -81,6 +98,7 @@ export const ANECDOTES: Anecdote[] = [
   },
   {
     id: 'gavarnie',
+    categorie: 'nature',
     titre: 'Un cirque de pierre et une cascade',
     texte:
       "Au fond d'une vallée pyrénéenne, un amphithéâtre de parois calcaires de plus de 1 500 mètres de hauteur encadre une cascade qui tombe en plusieurs étages.",
@@ -91,6 +109,7 @@ export const ANECDOTES: Anecdote[] = [
   },
   {
     id: 'lourdes',
+    categorie: 'histoire',
     titre: 'Des apparitions dans une grotte',
     texte:
       "En 1858, une jeune fille de 14 ans affirme avoir vu une dame lumineuse dans une grotte au bord d'un gave. Le lieu attire aujourd'hui des millions de pèlerins chaque année.",
@@ -101,6 +120,7 @@ export const ANECDOTES: Anecdote[] = [
   },
   {
     id: 'vezelay',
+    categorie: 'patrimoine',
     titre: 'Le départ d\'une croisade',
     texte:
       "Sur une colline bourguignonne, une basilique abrite les reliques d'une sainte. En 1146, un moine y prêche la deuxième croisade devant une foule immense.",
@@ -111,6 +131,7 @@ export const ANECDOTES: Anecdote[] = [
   },
   {
     id: 'alesia',
+    categorie: 'histoire',
     titre: 'Un siège légendaire',
     texte:
       "En 52 avant notre ère, une armée romaine de César encercle une ville gauloise sur un plateau. Son chef, un Arverne, tente de briser le siège avec une armée de secours.",
@@ -121,6 +142,7 @@ export const ANECDOTES: Anecdote[] = [
   },
   {
     id: 'chartres',
+    categorie: 'patrimoine',
     titre: 'Le bleu des vitraux',
     texte:
       "Cette cathédrale du XIIe siècle conserve une grande partie de ses vitraux d'origine. Un bleu profond, presque irréel, a donné son nom à une teinte célèbre.",
@@ -131,9 +153,10 @@ export const ANECDOTES: Anecdote[] = [
   },
   {
     id: 'strasbourg',
+    categorie: 'patrimoine',
     titre: 'Le plus haut édifice du monde',
     texte:
-      "Cette cathédrale gothique possède une flèche de 142 mètres. Au XIXe siècle, elle est pendant plusieurs années le bâtiment le plus haut du monde.",
+      "Cette cathédrale gothique possède une flèche de 142 mètres. De 1647 à 1874, elle reste plus de deux siècles le bâtiment le plus haut du monde.",
     lieu: 'Strasbourg (Bas-Rhin)',
     revelation: "La flèche de la cathédrale de Strasbourg dépasse les pyramides de Gizeh, et reste la plus haute du Moyen Âge.",
     lat: 48.5818,
@@ -141,6 +164,7 @@ export const ANECDOTES: Anecdote[] = [
   },
   {
     id: 'carnac',
+    categorie: 'histoire',
     titre: 'Une armée de pierres',
     texte:
       "Dans un champ breton, plus de 3 000 pierres dressées s'alignent en rangées parallèles sur plusieurs kilomètres. Elles datent du néolithique.",
@@ -151,6 +175,7 @@ export const ANECDOTES: Anecdote[] = [
   },
   {
     id: 'verdun',
+    categorie: 'histoire',
     titre: 'Une bataille de 300 jours',
     texte:
       "En 1916, l'armée allemande attaque une place forte de la Meuse. Les combats durent près de dix mois et font des centaines de milliers de victimes.",
@@ -161,6 +186,7 @@ export const ANECDOTES: Anecdote[] = [
   },
   {
     id: 'pointe-du-raz',
+    categorie: 'nature',
     titre: 'Le bout du monde',
     texte:
       "Au bout d'une péninsule bretonne, une falaise plonge dans l'Atlantique. On l'appelle souvent « le bout du monde ».",
@@ -171,6 +197,7 @@ export const ANECDOTES: Anecdote[] = [
   },
   {
     id: 'puy-de-dome',
+    categorie: 'nature',
     titre: 'Un temple au sommet',
     texte:
       "Sur le sommet de ce volcan endormi, des vestiges gallo-romains rappellent un temple dédié à un dieu du commerce. Le sommet dépasse les 1 400 mètres.",
@@ -181,6 +208,7 @@ export const ANECDOTES: Anecdote[] = [
   },
   {
     id: 'tourmalet',
+    categorie: 'nature',
     titre: 'Le col le plus redouté',
     texte:
       "Ce col pyrénéen culmine à plus de 2 100 mètres. Il est franchi pour la première fois par le Tour de France en 1910, et revient souvent dans la course.",
@@ -191,6 +219,7 @@ export const ANECDOTES: Anecdote[] = [
   },
   {
     id: 'ventoux',
+    categorie: 'nature',
     titre: 'Le Géant de Provence',
     texte:
       "Ce sommet isolé, couvert de cailloux blancs, domine la plaine du Comtat. Il est souvent visible de très loin, et son nom signifie « venteux ».",
@@ -201,6 +230,7 @@ export const ANECDOTES: Anecdote[] = [
   },
   {
     id: 'chambord',
+    categorie: 'patrimoine',
     titre: 'Un château pour un roi chasseur',
     texte:
       "Ce château de la Renaissance compte plus de 400 pièces et un escalier à double révolution. Il est bâti au XVIe siècle au milieu d'un immense parc.",
@@ -211,6 +241,7 @@ export const ANECDOTES: Anecdote[] = [
   },
   {
     id: 'rocamadour',
+    categorie: 'patrimoine',
     titre: 'Un village accroché à la falaise',
     texte:
       "Des maisons et des sanctuaires s'accrochent à une paroi rocheuse de plus de cent mètres de haut. Au Moyen Âge, les pèlerins y gravissent les marches à genoux.",
@@ -221,16 +252,18 @@ export const ANECDOTES: Anecdote[] = [
   },
   {
     id: 'padirac',
+    categorie: 'nature',
     titre: 'Une rivière sous la terre',
     texte:
       "Un puits de plus de 30 mètres s'ouvre dans un causse calcaire. Au fond, une rivière souterraine coule dans des galeries aux stalactites étincelantes.",
     lieu: 'Gouffre de Padirac (Lot)',
     revelation: "Le gouffre a été exploré en 1889 par Édouard-Alfred Martel, pionnier de la spéléologie.",
-    lat: 44.9826,
-    lon: 1.7714,
+    lat: 44.8583,
+    lon: 1.7522,
   },
   {
     id: 'saint-malo',
+    categorie: 'histoire',
     titre: 'Une ville de corsaires',
     texte:
       "Une cité entourée de remparts granitiques, face à la mer. Au XVIIIe siècle, ses capitaines de navires armés en course harcèlent les convois anglais.",
@@ -241,6 +274,7 @@ export const ANECDOTES: Anecdote[] = [
   },
   {
     id: 'bayeux',
+    categorie: 'histoire',
     titre: 'Une tapisserie brodée',
     texte:
       "Une broderie de plus de 70 mètres raconte, en images et en latin, une conquête de 1066. Elle est exposée dans un musée près de la cathédrale.",
@@ -251,6 +285,7 @@ export const ANECDOTES: Anecdote[] = [
   },
   {
     id: 'cognac',
+    categorie: 'terroir',
     titre: 'Un alcool qui porte le nom d\'une ville',
     texte:
       "Cette petite ville charentaise donne son nom à un alcool produit par distillation de vin blanc, puis vieilli longuement en fûts de chêne.",
@@ -261,6 +296,7 @@ export const ANECDOTES: Anecdote[] = [
   },
   {
     id: 'epernay',
+    categorie: 'terroir',
     titre: 'Des caves creusées dans la craie',
     texte:
       "Une avenue bordée de maisons de négoce s'étend au cœur d'une ville champenoise. Sous ses trottoirs courent des kilomètres de caves creusées dans la craie.",
@@ -271,6 +307,7 @@ export const ANECDOTES: Anecdote[] = [
   },
   {
     id: 'tour-eiffel',
+    categorie: 'patrimoine',
     titre: 'Une structure temporaire',
     texte:
       "Cette tour de fer est construite en 1889 pour une exposition universelle. Elle devait être démontée après vingt ans, mais elle est restée.",
@@ -281,9 +318,10 @@ export const ANECDOTES: Anecdote[] = [
   },
   {
     id: 'le-puy',
+    categorie: 'patrimoine',
     titre: 'Une cathédrale sur un piton volcanique',
     texte:
-      "Dans une ville de la Haute-Loire, une cathédrale est bâtie au sommet d'une aiguille de lave, à laquelle on accède par un escalier. Une statue domine le rocher voisin.",
+      "Dans une ville du Velay, une cathédrale est bâtie au sommet d'une aiguille de lave, à laquelle on accède par un escalier. Une statue domine le rocher voisin.",
     lieu: 'Le Puy-en-Velay (Haute-Loire)',
     revelation: "La cité est célèbre pour sa dentelle, et son rocher Corneille accueille une statue de la Vierge.",
     lat: 45.0435,
@@ -291,6 +329,7 @@ export const ANECDOTES: Anecdote[] = [
   },
   {
     id: 'roquefort',
+    categorie: 'terroir',
     titre: 'Un fromage affiné dans une montagne',
     texte:
       "Ce fromage de brebis est affiné dans des caves naturelles creusées dans une falaise calcaire. Le courant d'air y est constant toute l'année.",
@@ -301,6 +340,7 @@ export const ANECDOTES: Anecdote[] = [
   },
   {
     id: 'fourviere',
+    categorie: 'patrimoine',
     titre: 'Une basilique qui surplombe la ville',
     texte:
       "Une basilique de style néo-byzantin domine une ville en deux fleuves, au sommet d'une colline. Elle est construite à la fin du XIXe siècle.",
@@ -311,6 +351,7 @@ export const ANECDOTES: Anecdote[] = [
   },
   {
     id: 'bonne-mere',
+    categorie: 'patrimoine',
     titre: 'La Bonne Mère veille sur la mer',
     texte:
       "Une basilique blanche et dorée dresse sa statue sur un promontoire rocheux. Elle surplombe le port d'une grande ville méditerranéenne.",
@@ -321,6 +362,7 @@ export const ANECDOTES: Anecdote[] = [
   },
   {
     id: 'gros-horloge',
+    categorie: 'patrimoine',
     titre: 'Une horloge qui enjambe la rue',
     texte:
       "Dans une ville normande, un beffroi du XIVe siècle enjambe la rue principale. Son cadran doré est l'emblème de la cité.",
@@ -331,6 +373,7 @@ export const ANECDOTES: Anecdote[] = [
   },
   {
     id: 'oradour',
+    categorie: 'histoire',
     titre: 'Un village préservé en mémoire',
     texte:
       "Le 10 juin 1944, les SS massacrent les habitants de ce village limousin. Les ruines ont été laissées en l'état, comme un mémorial.",
@@ -338,5 +381,1006 @@ export const ANECDOTES: Anecdote[] = [
     revelation: "Le village martyr d'Oradour-sur-Glane fait 642 victimes. Ses ruines sont conservées en mémoire du massacre.",
     lat: 45.8919,
     lon: 1.0343,
+  },
+  {
+    id: 'camembert',
+    categorie: 'terroir',
+    titre: 'Un fromage né sous la Révolution',
+    texte:
+      "Selon la légende, une fermière normande aurait reçu en 1791 le secret d'un fromage à pâte molle d'un prêtre réfractaire caché chez elle. Le fromage porte aujourd'hui le nom de son minuscule village.",
+    lieu: 'Camembert (Orne)',
+    revelation: "Marie Harel est considérée comme la « mère » du camembert, du nom de ce village de moins de 200 habitants.",
+    lat: 48.892,
+    lon: 0.177,
+  },
+  {
+    id: 'espelette',
+    categorie: 'terroir',
+    titre: 'Des façades rouges en automne',
+    texte:
+      "À l'automne, les maisons blanches à colombages de ce village basque se couvrent de guirlandes de petits piments mis à sécher au soleil.",
+    lieu: 'Espelette (Pyrénées-Atlantiques)',
+    revelation: "Le piment d'Espelette bénéficie d'une AOP depuis 2000 et se cultive sur une vingtaine de communes.",
+    lat: 43.34,
+    lon: -1.447,
+  },
+  {
+    id: 'dijon',
+    categorie: 'terroir',
+    titre: 'Un condiment qui monte au nez',
+    texte:
+      "Cette capitale ducale a donné son nom à une préparation piquante à base de graines et de verjus. Sa recette, codifiée dès 1856, peut aujourd'hui être produite n'importe où dans le monde.",
+    lieu: 'Dijon (Côte-d\'Or)',
+    revelation: "La « moutarde de Dijon » désigne une recette et non une origine : la plupart des graines viennent du Canada.",
+    lat: 47.322,
+    lon: 5.041,
+  },
+  {
+    id: 'bresse',
+    categorie: 'terroir',
+    titre: 'Une volaille aux couleurs du drapeau',
+    texte:
+      "Pattes bleues, plumage blanc, crête rouge : cette volaille élevée en plein air est la seule à bénéficier d'une appellation d'origine en France.",
+    lieu: 'Bourg-en-Bresse (Ain)',
+    revelation: "Le poulet de Bresse a obtenu son AOC en 1957. Brillat-Savarin le surnommait « la reine des volailles ».",
+    lat: 46.205,
+    lon: 5.226,
+  },
+  {
+    id: 'agen',
+    categorie: 'terroir',
+    titre: 'Des fruits séchés au four',
+    texte:
+      "Rapportées d'Orient selon la tradition par des moines, ces prunes d'ente sont séchées au four puis expédiées par la Garonne. La ville qui les commercialisait leur a laissé son nom.",
+    lieu: 'Agen (Lot-et-Garonne)',
+    revelation: "Le pruneau d'Agen bénéficie d'une IGP. Les prunes sont cultivées dans tout le Sud-Ouest.",
+    lat: 44.203,
+    lon: 0.616,
+  },
+  {
+    id: 'guerande',
+    categorie: 'terroir',
+    titre: 'Récolter la mer à la main',
+    texte:
+      "Dans des bassins d'argile où l'eau de mer s'évapore lentement, des paludiers récoltent à la main un sel gris et une fine fleur blanche.",
+    lieu: 'Marais salants de Guérande (Loire-Atlantique)',
+    revelation: "Les marais salants de la presqu'île guérandaise sont exploités depuis le haut Moyen Âge.",
+    lat: 47.328,
+    lon: -2.429,
+  },
+  {
+    id: 'cancale',
+    categorie: 'terroir',
+    titre: 'Le port des huîtres',
+    texte:
+      "Depuis Louis XIV, ce port de la baie du Mont-Saint-Michel livre ses huîtres à la table royale. À marée basse, on voit les parcs ostréicoles s'étendre à perte de vue.",
+    lieu: 'Cancale (Ille-et-Vilaine)',
+    revelation: "Cancale est l'une des capitales françaises de l'huître, plate comme creuse.",
+    lat: 48.676,
+    lon: -1.852,
+  },
+  {
+    id: 'grasse',
+    categorie: 'terroir',
+    titre: 'La capitale des parfums',
+    texte:
+      "Au XVIe siècle, la ville est réputée pour ses gants en cuir… qu'elle se met à parfumer pour masquer leur odeur. Les champs de jasmin et de rose prennent alors le relais des tanneries.",
+    lieu: 'Grasse (Alpes-Maritimes)',
+    revelation: "Les savoir-faire liés au parfum en pays de Grasse sont inscrits au patrimoine immatériel de l'UNESCO depuis 2018.",
+    lat: 43.658,
+    lon: 6.924,
+  },
+  {
+    id: 'montelimar',
+    categorie: 'terroir',
+    titre: 'Une douceur de miel et d\'amandes',
+    texte:
+      "Grâce aux amandiers plantés au XVIIe siècle et au miel de lavande provençal, cette ville de la vallée du Rhône devient la capitale d'une confiserie blanche et collante.",
+    lieu: 'Montélimar (Drôme)',
+    revelation: "Le nougat de Montélimar doit contenir au moins 28 % d'amandes et 25 % de miel.",
+    lat: 44.558,
+    lon: 4.751,
+  },
+  {
+    id: 'saint-emilion',
+    categorie: 'terroir',
+    titre: 'Une église creusée dans la roche',
+    texte:
+      "Ce village viticole cache une église taillée d'un seul bloc dans le calcaire, au XIIe siècle. Tout autour, les vignes s'étendent sur des coteaux classés.",
+    lieu: 'Saint-Émilion (Gironde)',
+    revelation: "La juridiction de Saint-Émilion est le premier paysage viticole inscrit au patrimoine mondial, en 1999.",
+    lat: 44.894,
+    lon: -0.155,
+  },
+  {
+    id: 'rousses',
+    categorie: 'terroir',
+    titre: 'Des fromages dans un fort militaire',
+    texte:
+      "Construit au XIXe siècle pour défendre la frontière suisse, ce fort perché dans le massif jurassien abrite aujourd'hui des dizaines de milliers de meules qui y vieillissent lentement.",
+    lieu: 'Fort des Rousses (Jura)',
+    revelation: "Le fort des Rousses est devenu l'une des plus grandes caves d'affinage du comté.",
+    lat: 46.484,
+    lon: 6.062,
+  },
+  {
+    id: 'calissons',
+    categorie: 'terroir',
+    titre: 'Un sourire pour une reine',
+    texte:
+      "La légende raconte qu'un confiseur créa pour le mariage du roi René une friandise en forme de navette, à base de melon confit et d'amandes, qui fit enfin sourire la reine.",
+    lieu: 'Aix-en-Provence (Bouches-du-Rhône)',
+    revelation: "Le calisson d'Aix est recouvert d'une fine couche de glace royale, posée sur un pain azyme.",
+    lat: 43.529,
+    lon: 5.447,
+  },
+  {
+    id: 'castelnaudary',
+    categorie: 'terroir',
+    titre: 'La querelle du haricot',
+    texte:
+      "Trois villes du Lauragais se disputent la paternité de ce plat mijoté de haricots et de viandes. L'une d'elles s'en proclame la « capitale mondiale ».",
+    lieu: 'Castelnaudary (Aude)',
+    revelation: "Castelnaudary, Carcassonne et Toulouse revendiquent chacune leur cassoulet, mais la première y tient particulièrement.",
+    lat: 43.318,
+    lon: 1.954,
+  },
+  {
+    id: 'cambrai',
+    categorie: 'terroir',
+    titre: 'Une erreur devenue friandise',
+    texte:
+      "Au XIXe siècle, un apprenti confiseur aurait raté une fournée de bonbons. Plutôt que de les jeter, on les vendit… sous le nom de cette maladresse.",
+    lieu: 'Cambrai (Nord)',
+    revelation: "Les « bêtises de Cambrai » sont des bonbons à la menthe, striés de sucre caramélisé.",
+    lat: 50.176,
+    lon: 3.235,
+  },
+  {
+    id: 'limoges',
+    categorie: 'terroir',
+    titre: 'L\'or blanc',
+    texte:
+      "En 1768, on découvre près de cette ville un gisement de kaolin, une argile blanche indispensable à la porcelaine. La ville devient la capitale française des arts du feu.",
+    lieu: 'Limoges (Haute-Vienne)',
+    revelation: "La porcelaine de Limoges est exportée dans le monde entier depuis le XIXe siècle.",
+    lat: 45.834,
+    lon: 1.261,
+  },
+  {
+    id: 'sete',
+    categorie: 'terroir',
+    titre: 'Des combats sur l\'eau',
+    texte:
+      "Chaque été, dans les canaux de ce port méditerranéen, des hommes en blanc juchés sur des barques tentent de se faire tomber à l'eau à coups de lance.",
+    lieu: 'Sète (Hérault)',
+    revelation: "Les joutes nautiques sont pratiquées à Sète depuis 1666, date de la fondation du port.",
+    lat: 43.403,
+    lon: 3.697,
+  },
+  {
+    id: 'bayonne',
+    categorie: 'terroir',
+    titre: 'Le chocolat venu d\'Espagne',
+    texte:
+      "Au XVIIe siècle, des familles juives chassées de la péninsule Ibérique apportent dans ce port basque le secret du chocolat. La ville devient la première à le fabriquer en France.",
+    lieu: 'Bayonne (Pyrénées-Atlantiques)',
+    revelation: "Bayonne célèbre encore son chocolat lors de journées annuelles, au mois de mai.",
+    lat: 43.493,
+    lon: -1.475,
+  },
+  {
+    id: 'thiers',
+    categorie: 'terroir',
+    titre: 'La ville des couteaux',
+    texte:
+      "Dans cette cité accrochée à une vallée encaissée, des ouvriers allongés sur le ventre aiguisaient les lames au-dessus des meules actionnées par le torrent.",
+    lieu: 'Thiers (Puy-de-Dôme)',
+    revelation: "Thiers produit encore la majorité des couteaux fabriqués en France.",
+    lat: 45.856,
+    lon: 3.547,
+  },
+  {
+    id: 'salers',
+    categorie: 'terroir',
+    titre: 'Des vaches aux cornes en lyre',
+    texte:
+      "Dans ce village de pierre volcanique, une race bovine à la robe acajou et aux longues cornes a donné son nom à un fromage d'estive.",
+    lieu: 'Salers (Cantal)',
+    revelation: "Le salers est fabriqué uniquement entre le 15 avril et le 15 novembre, quand les vaches pâturent l'herbe des montagnes.",
+    lat: 45.139,
+    lon: 2.494,
+  },
+  {
+    id: 'sancerre',
+    categorie: 'terroir',
+    titre: 'Un piton planté de vignes',
+    texte:
+      "Perchée sur une butte qui domine la Loire, cette petite ville a donné son nom à un vin blanc de sauvignon et à un fromage de chèvre voisin, le crottin.",
+    lieu: 'Sancerre (Cher)',
+    revelation: "Le crottin de Chavignol est produit au pied de la colline de Sancerre.",
+    lat: 47.331,
+    lon: 2.836,
+  },
+  {
+    id: 'domremy',
+    categorie: 'histoire',
+    titre: 'Des voix dans un jardin',
+    texte:
+      "Vers 1425, une jeune paysanne de ce village lorrain affirme entendre des voix qui lui demandent de sauver le royaume de France.",
+    lieu: 'Domrémy-la-Pucelle (Vosges)',
+    revelation: "Jeanne d'Arc y est née vers 1412. Sa maison natale se visite encore.",
+    lat: 48.442,
+    lon: 5.674,
+  },
+  {
+    id: 'omaha',
+    categorie: 'histoire',
+    titre: 'Le jour le plus long',
+    texte:
+      "Le 6 juin 1944 à l'aube, des milliers de soldats américains débarquent sur une plage normande sous un feu nourri. Elle restera la plus meurtrière du Débarquement.",
+    lieu: 'Omaha Beach, Colleville-sur-Mer (Calvados)',
+    revelation: "Le cimetière américain de Colleville-sur-Mer domine la plage et compte près de 9 400 tombes.",
+    lat: 49.359,
+    lon: -0.849,
+  },
+  {
+    id: 'versailles',
+    categorie: 'patrimoine',
+    titre: 'Un pavillon de chasse devenu palais',
+    texte:
+      "Un roi transforme le modeste relais de chasse de son père en résidence démesurée et y installe la Cour en 1682. Sa galerie compte 357 miroirs.",
+    lieu: 'Versailles (Yvelines)',
+    revelation: "Le château de Versailles a été inscrit au patrimoine mondial de l'UNESCO en 1979.",
+    lat: 48.805,
+    lon: 2.12,
+  },
+  {
+    id: 'varennes',
+    categorie: 'histoire',
+    titre: 'Un roi reconnu à cause d\'une pièce',
+    texte:
+      "En juin 1791, une famille déguisée fuit Paris en berline. Un maître de poste reconnaît le roi grâce à son portrait sur un assignat, et la fuite s'arrête dans ce bourg d'Argonne.",
+    lieu: 'Varennes-en-Argonne (Meuse)',
+    revelation: "L'arrestation de Louis XVI à Varennes a ruiné la confiance des Français envers la monarchie.",
+    lat: 49.226,
+    lon: 5.031,
+  },
+  {
+    id: 'ajaccio',
+    categorie: 'histoire',
+    titre: 'Le berceau d\'un empereur',
+    texte:
+      "En 1769, un garçon naît dans une maison de la vieille ville de ce port insulaire. Trente-cinq ans plus tard, il se couronne lui-même empereur.",
+    lieu: 'Ajaccio (Corse-du-Sud)',
+    revelation: "Napoléon Bonaparte est né à Ajaccio. Sa maison natale est aujourd'hui un musée national.",
+    lat: 41.919,
+    lon: 8.738,
+  },
+  {
+    id: 'rethondes',
+    categorie: 'histoire',
+    titre: 'Un wagon dans une clairière',
+    texte:
+      "Le 11 novembre 1918, l'armistice est signé dans un wagon garé en forêt. En 1940, Hitler exige que la défaite française soit signée au même endroit, dans le même wagon.",
+    lieu: 'Clairière de Rethondes, Compiègne (Oise)',
+    revelation: "Le wagon original a été détruit en 1945 ; une réplique est exposée dans la clairière de l'Armistice.",
+    lat: 49.427,
+    lon: 2.906,
+  },
+  {
+    id: 'vichy',
+    categorie: 'histoire',
+    titre: 'Des sources et un régime',
+    texte:
+      "Station thermale réputée pour ses eaux et ses pastilles, cette ville est choisie en 1940 pour accueillir le gouvernement, faute d'une autre ville disposant d'autant de chambres d'hôtel.",
+    lieu: 'Vichy (Allier)',
+    revelation: "Le régime de Vichy siège dans la ville de 1940 à 1944. Ses villes d'eaux sont inscrites à l'UNESCO depuis 2021.",
+    lat: 46.128,
+    lon: 3.425,
+  },
+  {
+    id: 'la-rochelle',
+    categorie: 'histoire',
+    titre: 'Un siège de quatorze mois',
+    texte:
+      "En 1627, Richelieu fait construire une digue de 1,5 km pour couper ce port protestant de la mer. Affamée, la ville capitule après plus d'un an.",
+    lieu: 'La Rochelle (Charente-Maritime)',
+    revelation: "Le siège de La Rochelle fit plus de 20 000 morts. Les tours du Vieux-Port en gardent la mémoire.",
+    lat: 46.159,
+    lon: -1.152,
+  },
+  {
+    id: 'montsegur',
+    categorie: 'histoire',
+    titre: 'Le bûcher du « Pog »',
+    texte:
+      "En 1244, après dix mois de siège, plus de deux cents hérétiques refusent d'abjurer leur foi et sont brûlés au pied d'un château perché sur un piton.",
+    lieu: 'Montségur (Ariège)',
+    revelation: "La chute de Montségur marque la fin de la résistance cathare dans le Languedoc.",
+    lat: 42.876,
+    lon: 1.832,
+  },
+  {
+    id: 'azincourt',
+    categorie: 'histoire',
+    titre: 'La boue et les archers',
+    texte:
+      "Le 25 octobre 1415, la chevalerie française, embourbée dans un champ labouré, est décimée par les archers anglais d'Henri V.",
+    lieu: 'Azincourt (Pas-de-Calais)',
+    revelation: "La bataille d'Azincourt est l'une des plus lourdes défaites françaises de la guerre de Cent Ans.",
+    lat: 50.463,
+    lon: 2.13,
+  },
+  {
+    id: 'chauvet',
+    categorie: 'histoire',
+    titre: 'Des lions dans la caverne',
+    texte:
+      "En 1994, trois spéléologues découvrent près d'une arche naturelle une grotte ornée de lions, de rhinocéros et de mammouths. Ces peintures ont plus de 30 000 ans.",
+    lieu: 'Vallon-Pont-d\'Arc (Ardèche)',
+    revelation: "La grotte Chauvet, fermée au public, est reproduite à l'identique à proximité.",
+    lat: 44.407,
+    lon: 4.394,
+  },
+  {
+    id: 'reims',
+    categorie: 'histoire',
+    titre: 'Là où l\'on sacre les rois',
+    texte:
+      "Selon la tradition, Clovis y est baptisé vers 496. Pendant des siècles, presque tous les rois de France viennent s'y faire sacrer dans la cathédrale.",
+    lieu: 'Reims (Marne)',
+    revelation: "La cathédrale Notre-Dame de Reims a accueilli 25 sacres royaux, de 1027 à 1825.",
+    lat: 49.254,
+    lon: 4.034,
+  },
+  {
+    id: 'cluny',
+    categorie: 'histoire',
+    titre: 'La plus grande église du monde',
+    texte:
+      "Fondée en 910, cette abbaye bourguignonne dirige jusqu'à 1 400 monastères en Europe. Son église reste la plus vaste de la chrétienté jusqu'à la construction de Saint-Pierre de Rome.",
+    lieu: 'Cluny (Saône-et-Loire)',
+    revelation: "L'abbatiale de Cluny a été en grande partie démolie après la Révolution, comme carrière de pierres.",
+    lat: 46.434,
+    lon: 4.659,
+  },
+  {
+    id: 'dole',
+    categorie: 'histoire',
+    titre: 'Le savant du vaccin',
+    texte:
+      "En 1822 naît dans cette ville franc-comtoise, fils d'un tanneur, un chimiste qui mettra au point le vaccin contre la rage.",
+    lieu: 'Dole (Jura)',
+    revelation: "Louis Pasteur est né à Dole. Sa maison natale est devenue un musée.",
+    lat: 47.092,
+    lon: 5.49,
+  },
+  {
+    id: 'aigues-mortes',
+    categorie: 'histoire',
+    titre: 'Le port d\'une croisade',
+    texte:
+      "Pour disposer d'un port sur la Méditerranée, un roi fait bâtir une ville neuve au milieu des marais salants. Il y embarque en 1248 pour la croisade.",
+    lieu: 'Aigues-Mortes (Gard)',
+    revelation: "Saint Louis fonde Aigues-Mortes, dont les remparts sont intacts. La mer s'est depuis retirée.",
+    lat: 43.567,
+    lon: 4.191,
+  },
+  {
+    id: 'lupiac',
+    categorie: 'histoire',
+    titre: 'Le vrai mousquetaire',
+    texte:
+      "Vers 1611 naît dans ce village gascon Charles de Batz de Castelmore, devenu capitaine des mousquetaires du roi. Alexandre Dumas le rendra immortel.",
+    lieu: 'Lupiac (Gers)',
+    revelation: "D'Artagnan est né au château de Castelmore, près de Lupiac, qui lui consacre un musée.",
+    lat: 43.683,
+    lon: 0.178,
+  },
+  {
+    id: 'colombey',
+    categorie: 'histoire',
+    titre: 'Une croix sur la colline',
+    texte:
+      "Le général de Gaulle se retire dans sa propriété de la Boisserie, dans ce petit village champenois. Une immense croix de Lorraine domine aujourd'hui la colline.",
+    lieu: 'Colombey-les-Deux-Églises (Haute-Marne)',
+    revelation: "De Gaulle y meurt en 1970 et y est enterré, selon sa volonté, dans le cimetière du village.",
+    lat: 48.223,
+    lon: 4.886,
+  },
+  {
+    id: 'mont-aiguille',
+    categorie: 'histoire',
+    titre: 'La naissance de l\'alpinisme',
+    texte:
+      "En 1492, sur ordre de Charles VIII, une équipe escalade avec des échelles une montagne réputée inaccessible, qui ressemble à une table de pierre.",
+    lieu: 'Mont Aiguille (Isère)',
+    revelation: "L'ascension du mont Aiguille est souvent considérée comme l'acte de naissance de l'alpinisme.",
+    lat: 44.842,
+    lon: 5.553,
+  },
+  {
+    id: 'verdon',
+    categorie: 'nature',
+    titre: 'Le Grand Canyon européen',
+    texte:
+      "Une rivière aux eaux couleur émeraude a creusé ici des gorges dont les falaises atteignent 700 mètres de haut.",
+    lieu: 'Gorges du Verdon (Alpes-de-Haute-Provence)',
+    revelation: "Le Verdon termine sa course dans le lac de Sainte-Croix, créé par un barrage en 1974.",
+    lat: 43.794,
+    lon: 6.399,
+  },
+  {
+    id: 'etretat',
+    categorie: 'nature',
+    titre: 'Une aiguille dans la falaise',
+    texte:
+      "Sur cette côte normande, des falaises de craie forment des arches et une aiguille de 50 mètres. Un célèbre gentleman-cambrioleur y cachait ses trésors.",
+    lieu: 'Étretat (Seine-Maritime)',
+    revelation: "Maurice Leblanc place dans « L'Aiguille creuse » le repaire d'Arsène Lupin. Monet y a peint plus de 80 toiles.",
+    lat: 49.707,
+    lon: 0.204,
+  },
+  {
+    id: 'camargue',
+    categorie: 'nature',
+    titre: 'Des flamants et des chevaux blancs',
+    texte:
+      "Dans ce delta de marais et d'étangs salés, des chevaux blancs côtoient des taureaux noirs et des milliers de flamants roses.",
+    lieu: 'Saintes-Maries-de-la-Mer, Camargue (Bouches-du-Rhône)',
+    revelation: "La Camargue est la seule zone de nidification régulière du flamant rose en France.",
+    lat: 43.452,
+    lon: 4.429,
+  },
+  {
+    id: 'calanques',
+    categorie: 'nature',
+    titre: 'Des fjords en Méditerranée',
+    texte:
+      "Entre deux villes, des falaises de calcaire blanc plongent dans une eau turquoise. Ces criques sont protégées par un parc national aux portes d'une métropole.",
+    lieu: 'Calanque d\'En-Vau, Cassis (Bouches-du-Rhône)',
+    revelation: "Le parc national des Calanques, créé en 2012, est le premier parc national périurbain d'Europe.",
+    lat: 43.203,
+    lon: 5.501,
+  },
+  {
+    id: 'annecy',
+    categorie: 'nature',
+    titre: 'Le lac le plus pur',
+    texte:
+      "Entouré de montagnes, ce lac alpin a été sauvé de la pollution dans les années 1960 grâce à un égout qui en fait le tour. Son eau est aujourd'hui réputée pour sa transparence.",
+    lieu: 'Lac d\'Annecy (Haute-Savoie)',
+    revelation: "Le lac d'Annecy est souvent présenté comme l'un des plus purs d'Europe.",
+    lat: 45.86,
+    lon: 6.17,
+  },
+  {
+    id: 'bonifacio',
+    categorie: 'nature',
+    titre: 'Une ville au bord du vide',
+    texte:
+      "Construite au sommet de falaises de calcaire blanc, la vieille ville surplombe la mer de 70 mètres. Par temps clair, on aperçoit la Sardaigne.",
+    lieu: 'Bonifacio (Corse-du-Sud)',
+    revelation: "Les Bouches de Bonifacio séparent la Corse de la Sardaigne sur seulement 11 km.",
+    lat: 41.387,
+    lon: 9.159,
+  },
+  {
+    id: 'baie-de-somme',
+    categorie: 'nature',
+    titre: 'Des phoques sur le sable',
+    texte:
+      "À marée basse, des dizaines de phoques veaux-marins se prélassent sur les bancs de sable de cette grande baie de la Manche.",
+    lieu: 'Baie de Somme (Somme)',
+    revelation: "La baie de Somme accueille la plus importante colonie de phoques veaux-marins de France.",
+    lat: 50.214,
+    lon: 1.566,
+  },
+  {
+    id: 'ploumanach',
+    categorie: 'nature',
+    titre: 'Des rochers couleur saumon',
+    texte:
+      "Sur cette côte bretonne, d'énormes blocs de granite rose ont été sculptés par l'érosion en formes étranges : tortue, champignon, chapeau de Napoléon…",
+    lieu: 'Ploumanac\'h, Perros-Guirec (Côtes-d\'Armor)',
+    revelation: "La côte de Granit rose est l'un des trois seuls endroits au monde à présenter ce granite.",
+    lat: 48.83,
+    lon: -3.483,
+  },
+  {
+    id: 'tarn',
+    categorie: 'nature',
+    titre: 'Des gorges entre deux causses',
+    texte:
+      "Une rivière serpente au fond d'un canyon creusé entre deux plateaux calcaires. Des villages accrochés aux parois ne sont accessibles que par la route sinueuse.",
+    lieu: 'Gorges du Tarn, Sainte-Enimie (Lozère)',
+    revelation: "Les Causses et les Cévennes sont inscrits au patrimoine mondial au titre de l'agropastoralisme.",
+    lat: 44.365,
+    lon: 3.412,
+  },
+  {
+    id: 'gerbier',
+    categorie: 'nature',
+    titre: 'Là où naît le plus long fleuve',
+    texte:
+      "Au pied d'un mont volcanique en forme de pain de sucre, quelques filets d'eau sortent de terre. Ils formeront le plus long fleuve de France.",
+    lieu: 'Mont Gerbier-de-Jonc (Ardèche)',
+    revelation: "La Loire prend sa source au pied du mont Gerbier-de-Jonc et parcourt plus de 1 000 km.",
+    lat: 44.844,
+    lon: 4.219,
+  },
+  {
+    id: 'fontainebleau',
+    categorie: 'nature',
+    titre: 'La forêt des grimpeurs',
+    texte:
+      "Dans une forêt royale proche de la capitale, des milliers de blocs de grès attirent des grimpeurs du monde entier venus « faire du bloc ».",
+    lieu: 'Forêt de Fontainebleau (Seine-et-Marne)',
+    revelation: "Fontainebleau est considérée comme le berceau de l'escalade de bloc.",
+    lat: 48.404,
+    lon: 2.7,
+  },
+  {
+    id: 'marais-poitevin',
+    categorie: 'nature',
+    titre: 'La Venise verte',
+    texte:
+      "On circule en barque à fond plat sur des canaux bordés de frênes têtards, dans ce marais asséché par les moines au Moyen Âge.",
+    lieu: 'Coulon, Marais poitevin (Deux-Sèvres)',
+    revelation: "Le Marais poitevin est la deuxième zone humide de France après la Camargue.",
+    lat: 46.322,
+    lon: -0.586,
+  },
+  {
+    id: 'broceliande',
+    categorie: 'nature',
+    titre: 'La forêt de Merlin',
+    texte:
+      "Selon la légende arthurienne, l'enchanteur Merlin y serait retenu prisonnier par la fée Viviane. On y trouve une fontaine et un « val sans retour ».",
+    lieu: 'Forêt de Paimpont (Ille-et-Vilaine)',
+    revelation: "La forêt de Paimpont est identifiée depuis le XIXe siècle à la légendaire Brocéliande.",
+    lat: 48.019,
+    lon: -2.171,
+  },
+  {
+    id: 'gerardmer',
+    categorie: 'nature',
+    titre: 'La perle des Vosges',
+    texte:
+      "Ce grand lac glaciaire de moyenne montagne, dans l'Est, est bordé d'une station qui accueille chaque hiver un festival de cinéma fantastique.",
+    lieu: 'Gérardmer (Vosges)',
+    revelation: "Le lac de Gérardmer est le plus grand lac naturel du massif des Vosges.",
+    lat: 48.07,
+    lon: 6.877,
+  },
+  {
+    id: 'porquerolles',
+    categorie: 'nature',
+    titre: 'Une île sans voitures',
+    texte:
+      "Cette île méditerranéenne, rachetée par l'État en 1971, abrite des plages de sable fin et un conservatoire de variétés fruitières. Les voitures n'y sont pas autorisées.",
+    lieu: 'Porquerolles (Var)',
+    revelation: "Porquerolles fait partie du parc national de Port-Cros, au large d'Hyères.",
+    lat: 43.0,
+    lon: 6.203,
+  },
+  {
+    id: 'hossegor',
+    categorie: 'nature',
+    titre: 'La vague du gouffre',
+    texte:
+      "Un canyon sous-marin au large de cette plage landaise concentre l'énergie de la houle et produit des vagues réputées parmi les plus puissantes d'Europe.",
+    lieu: 'Hossegor (Landes)',
+    revelation: "Le « gouf » de Capbreton permet à Hossegor d'accueillir des compétitions mondiales de surf.",
+    lat: 43.666,
+    lon: -1.44,
+  },
+  {
+    id: 'briancon',
+    categorie: 'nature',
+    titre: 'La plus haute ville de France',
+    texte:
+      "Fortifiée par Vauban, cette ville alpine est située à plus de 1 300 mètres d'altitude. Son air pur en fit autrefois un lieu de cure contre la tuberculose.",
+    lieu: 'Briançon (Hautes-Alpes)',
+    revelation: "Briançon est souvent présentée comme la ville la plus haute de France.",
+    lat: 44.899,
+    lon: 6.643,
+  },
+  {
+    id: 'colmar',
+    categorie: 'patrimoine',
+    titre: 'Une petite Venise alsacienne',
+    texte:
+      "Des maisons à colombages multicolores bordent un canal où naviguaient autrefois les maraîchers. Le sculpteur de la statue de la Liberté est né dans cette ville.",
+    lieu: 'Colmar (Haut-Rhin)',
+    revelation: "Auguste Bartholdi est né à Colmar en 1834. Un musée lui est consacré.",
+    lat: 48.074,
+    lon: 7.358,
+  },
+  {
+    id: 'nancy',
+    categorie: 'patrimoine',
+    titre: 'Des grilles d\'or',
+    texte:
+      "Un roi détrôné, beau-père de Louis XV, offre à sa ville une place royale fermée par des grilles dorées. Elle relie la vieille ville à la ville neuve.",
+    lieu: 'Nancy (Meurthe-et-Moselle)',
+    revelation: "La place Stanislas est inscrite au patrimoine mondial de l'UNESCO depuis 1983.",
+    lat: 48.693,
+    lon: 6.183,
+  },
+  {
+    id: 'albi',
+    categorie: 'patrimoine',
+    titre: 'Une forteresse de briques',
+    texte:
+      "Cette cathédrale ressemble à une forteresse : elle a été bâtie en briques après la croisade contre les cathares, pour affirmer la puissance de l'Église.",
+    lieu: 'Albi (Tarn)',
+    revelation: "La cathédrale Sainte-Cécile d'Albi est la plus grande cathédrale de briques au monde.",
+    lat: 43.929,
+    lon: 2.143,
+  },
+  {
+    id: 'orange',
+    categorie: 'patrimoine',
+    titre: 'Un mur digne d\'un empereur',
+    texte:
+      "Ce théâtre romain conserve son mur de scène presque intact, haut de 37 mètres. Louis XIV le qualifiait de « plus belle muraille de son royaume ».",
+    lieu: 'Orange (Vaucluse)',
+    revelation: "Le théâtre antique d'Orange accueille chaque été les Chorégies, un festival lyrique.",
+    lat: 44.136,
+    lon: 4.808,
+  },
+  {
+    id: 'amiens',
+    categorie: 'patrimoine',
+    titre: 'La plus vaste cathédrale de France',
+    texte:
+      "Ses dimensions sont telles qu'on pourrait y loger deux fois Notre-Dame de Paris. Elle a été construite en à peine cinquante ans, au XIIIe siècle.",
+    lieu: 'Amiens (Somme)',
+    revelation: "La cathédrale Notre-Dame d'Amiens est le plus grand édifice gothique de France par son volume.",
+    lat: 49.895,
+    lon: 2.302,
+  },
+  {
+    id: 'besancon',
+    categorie: 'patrimoine',
+    titre: 'Une citadelle dans une boucle',
+    texte:
+      "Vauban fortifie cette ville enserrée dans un méandre de rivière. La citadelle, perchée sur un rocher, abrite aujourd'hui un zoo et des musées.",
+    lieu: 'Besançon (Doubs)',
+    revelation: "Les fortifications de Vauban sont inscrites au patrimoine mondial depuis 2008.",
+    lat: 47.231,
+    lon: 6.031,
+  },
+  {
+    id: 'briare',
+    categorie: 'patrimoine',
+    titre: 'Un canal qui enjambe un fleuve',
+    texte:
+      "Achevé en 1896, ce pont métallique long de 662 mètres permet aux péniches de franchir la Loire sans toucher l'eau du fleuve.",
+    lieu: 'Pont-canal de Briare (Loiret)',
+    revelation: "Le pont-canal de Briare fut longtemps le plus long d'Europe.",
+    lat: 47.64,
+    lon: 2.731,
+  },
+  {
+    id: 'ronchamp',
+    categorie: 'patrimoine',
+    titre: 'Une chapelle en forme de chapeau',
+    texte:
+      "Sur une colline franc-comtoise, un architecte suisse construit en 1955 une chapelle aux murs courbes et au toit en forme de coque de bateau.",
+    lieu: 'Ronchamp (Haute-Saône)',
+    revelation: "La chapelle Notre-Dame-du-Haut est l'une des œuvres de Le Corbusier inscrites à l'UNESCO.",
+    lat: 47.704,
+    lon: 6.621,
+  },
+  {
+    id: 'guedelon',
+    categorie: 'patrimoine',
+    titre: 'Un château construit aujourd\'hui',
+    texte:
+      "Depuis 1997, des ouvriers bâtissent un château fort avec les seules techniques du XIIIe siècle : pas de grue moderne, pas de béton.",
+    lieu: 'Guédelon (Yonne)',
+    revelation: "Le chantier de Guédelon, à Treigny, accueille des centaines de milliers de visiteurs chaque année.",
+    lat: 47.585,
+    lon: 3.153,
+  },
+  {
+    id: 'le-havre',
+    categorie: 'patrimoine',
+    titre: 'Une ville sortie du béton',
+    texte:
+      "Rasée par les bombardements de 1944, cette ville portuaire est reconstruite par l'architecte Auguste Perret, qui utilise le béton armé comme matériau noble.",
+    lieu: 'Le Havre (Seine-Maritime)',
+    revelation: "Le centre reconstruit du Havre est inscrit au patrimoine mondial de l'UNESCO depuis 2005.",
+    lat: 49.494,
+    lon: 0.107,
+  },
+  {
+    id: 'nice',
+    categorie: 'patrimoine',
+    titre: 'Une promenade financée par des Anglais',
+    texte:
+      "Au XIXe siècle, la colonie anglaise qui passe l'hiver sur cette côte finance un chemin le long de la mer. Il devient un boulevard de 7 km bordé de palmiers.",
+    lieu: 'Nice (Alpes-Maritimes)',
+    revelation: "La Promenade des Anglais est le symbole de Nice, inscrite à l'UNESCO avec la ville en 2021.",
+    lat: 43.695,
+    lon: 7.265,
+  },
+  {
+    id: 'bordeaux',
+    categorie: 'patrimoine',
+    titre: 'Un miroir au bord du fleuve',
+    texte:
+      "Face à une place royale du XVIIIe siècle, une fine pellicule d'eau reflète les façades. Toutes les quelques minutes, un brouillard artificiel s'en échappe.",
+    lieu: 'Bordeaux (Gironde)',
+    revelation: "Le miroir d'eau de la place de la Bourse, inauguré en 2006, est le plus grand du monde.",
+    lat: 44.841,
+    lon: -0.57,
+  },
+  {
+    id: 'toulouse',
+    categorie: 'patrimoine',
+    titre: 'La ville rose s\'envole',
+    texte:
+      "Ses bâtiments en briques lui valent un surnom coloré. Au XXe siècle, elle devient le berceau de l'Aéropostale, puis la capitale européenne de l'aéronautique.",
+    lieu: 'Toulouse (Haute-Garonne)',
+    revelation: "Toulouse accueille les chaînes d'assemblage d'Airbus et la Cité de l'espace.",
+    lat: 43.604,
+    lon: 1.444,
+  },
+  {
+    id: 'nantes',
+    categorie: 'patrimoine',
+    titre: 'Un éléphant dans la ville',
+    texte:
+      "Sur une île d'anciens chantiers navals, un éléphant mécanique de 12 mètres de haut se promène avec des passagers sur le dos.",
+    lieu: 'Nantes (Loire-Atlantique)',
+    revelation: "Les Machines de l'île s'inspirent de l'univers de Jules Verne, né à Nantes en 1828.",
+    lat: 47.206,
+    lon: -1.564,
+  },
+  {
+    id: 'le-mans',
+    categorie: 'patrimoine',
+    titre: 'Vingt-quatre heures à fond',
+    texte:
+      "Depuis 1923, des voitures tournent jour et nuit sur un circuit en partie tracé sur des routes ordinaires, avec une ligne droite de près de 6 km.",
+    lieu: 'Le Mans (Sarthe)',
+    revelation: "Les 24 Heures du Mans sont la plus ancienne course d'endurance automobile encore disputée.",
+    lat: 47.956,
+    lon: 0.207,
+  },
+  {
+    id: 'aubusson',
+    categorie: 'patrimoine',
+    titre: 'Des tableaux de laine',
+    texte:
+      "Dans cette petite ville du Limousin, des lissiers tissent depuis le XVIe siècle des tapisseries monumentales grâce à l'eau peu calcaire de la rivière.",
+    lieu: 'Aubusson (Creuse)',
+    revelation: "La tapisserie d'Aubusson est inscrite au patrimoine culturel immatériel de l'UNESCO depuis 2009.",
+    lat: 45.956,
+    lon: 2.168,
+  },
+  {
+    id: 'collonges',
+    categorie: 'patrimoine',
+    titre: 'Un village couleur brique',
+    texte:
+      "Toutes les maisons, tours et l'église de ce village sont bâties dans un grès rouge sombre. Il est à l'origine de l'association des « Plus Beaux Villages de France ».",
+    lieu: 'Collonges-la-Rouge (Corrèze)',
+    revelation: "L'association des Plus Beaux Villages de France est fondée à Collonges-la-Rouge en 1982.",
+    lat: 45.06,
+    lon: 1.656,
+  },
+  {
+    id: 'nohant',
+    categorie: 'patrimoine',
+    titre: 'La maison des artistes',
+    texte:
+      "Dans sa maison du Berry, une romancière au pseudonyme masculin reçoit Chopin, Delacroix, Liszt et Flaubert.",
+    lieu: 'Nohant-Vic (Indre)',
+    revelation: "George Sand y a écrit une grande partie de son œuvre. Chopin y a composé de nombreuses pièces.",
+    lat: 46.626,
+    lon: 1.974,
+  },
+  {
+    id: 'charleville',
+    categorie: 'patrimoine',
+    titre: 'Un poète et des marionnettes',
+    texte:
+      "Cette ville proche de la frontière belge a vu naître un poète fugueur qui écrivit son œuvre avant 20 ans. Elle accueille aussi un grand festival mondial de marionnettes.",
+    lieu: 'Charleville-Mézières (Ardennes)',
+    revelation: "Arthur Rimbaud est né à Charleville en 1854. Sa place Ducale rappelle la place des Vosges.",
+    lat: 49.773,
+    lon: 4.721,
+  },
+  {
+    id: 'metz',
+    categorie: 'patrimoine',
+    titre: 'La lanterne du bon Dieu',
+    texte:
+      "Cette cathédrale lorraine possède l'une des plus grandes surfaces de vitraux d'Europe, dont certains dessinés par Marc Chagall.",
+    lieu: 'Metz (Moselle)',
+    revelation: "La cathédrale Saint-Étienne de Metz compte près de 6 500 m² de vitraux.",
+    lat: 49.12,
+    lon: 6.176,
+  },
+  {
+    id: 'troyes',
+    categorie: 'patrimoine',
+    titre: 'Une ville en forme de bouchon',
+    texte:
+      "Le cœur historique de cette ville, où l'on trouve d'innombrables maisons à pans de bois, dessine sur le plan la forme d'un bouchon de champagne.",
+    lieu: 'Troyes (Aube)',
+    revelation: "Troyes est aussi la capitale historique de la bonneterie et des magasins d'usine.",
+    lat: 48.297,
+    lon: 4.074,
+  },
+  {
+    id: 'puy-du-fou',
+    categorie: 'patrimoine',
+    titre: 'Des siècles d\'histoire en spectacle',
+    texte:
+      "Né en 1978 d'un spectacle nocturne joué par des bénévoles devant un château en ruine, ce parc vendéen est devenu l'un des plus fréquentés de France.",
+    lieu: 'Le Puy du Fou, Les Epesses (Vendée)',
+    revelation: "Le Puy du Fou a été élu à plusieurs reprises meilleur parc du monde.",
+    lat: 46.889,
+    lon: -0.93,
+  },
+  {
+    id: 'albertville',
+    categorie: 'histoire',
+    titre: 'La flamme en 1992',
+    texte:
+      "En février 1992, cette ville savoyarde accueille les XVIe Jeux olympiques d'hiver. La cérémonie d'ouverture est mise en scène par Philippe Decouflé.",
+    lieu: 'Albertville (Savoie)',
+    revelation: "Les épreuves des JO d'Albertville se sont déroulées dans de nombreuses stations de Tarentaise.",
+    lat: 45.676,
+    lon: 6.392,
+  },
+  {
+    id: 'collioure',
+    categorie: 'patrimoine',
+    titre: 'La naissance des fauves',
+    texte:
+      "En 1905, Matisse et Derain peignent ce petit port catalan avec des couleurs si vives qu'un critique les traite de « fauves ».",
+    lieu: 'Collioure (Pyrénées-Orientales)',
+    revelation: "Le clocher de Collioure, ancien phare, est l'un des sujets les plus peints de la côte Vermeille.",
+    lat: 42.526,
+    lon: 3.084,
+  },
+  {
+    id: 'giverny',
+    categorie: 'patrimoine',
+    titre: 'Le jardin des nymphéas',
+    texte:
+      "Un peintre impressionniste fait creuser un étang dans son jardin normand, y plante des nymphéas et les peint pendant près de trente ans.",
+    lieu: 'Giverny (Eure)',
+    revelation: "Claude Monet a vécu à Giverny de 1883 à sa mort, en 1926.",
+    lat: 49.075,
+    lon: 1.533,
+  },
+  {
+    id: 'auvers',
+    categorie: 'patrimoine',
+    titre: 'Les derniers mois d\'un peintre',
+    texte:
+      "En 1890, un peintre hollandais passe ses deux derniers mois dans ce village de la vallée de l'Oise et y peint plus de 70 toiles.",
+    lieu: 'Auvers-sur-Oise (Val-d\'Oise)',
+    revelation: "Vincent van Gogh repose au cimetière d'Auvers, aux côtés de son frère Théo.",
+    lat: 49.071,
+    lon: 2.17,
+  },
+  {
+    id: 'moissac',
+    categorie: 'patrimoine',
+    titre: 'Un cloître sur le chemin',
+    texte:
+      "Sur la route de Compostelle, cette abbaye possède l'un des plus anciens cloîtres romans historiés, avec 76 chapiteaux sculptés.",
+    lieu: 'Moissac (Tarn-et-Garonne)',
+    revelation: "L'abbaye Saint-Pierre de Moissac est inscrite à l'UNESCO au titre des chemins de Compostelle.",
+    lat: 44.105,
+    lon: 1.085,
+  },
+  {
+    id: 'chenonceau',
+    categorie: 'patrimoine',
+    titre: 'Le château des dames',
+    texte:
+      "Ce château enjambe une rivière sur une galerie à arches. Il a été transformé et embelli par plusieurs femmes, dont Diane de Poitiers et Catherine de Médicis.",
+    lieu: 'Chenonceau (Indre-et-Loire)',
+    revelation: "Pendant la Seconde Guerre mondiale, sa galerie permettait de passer en zone libre.",
+    lat: 47.325,
+    lon: 1.07,
+  },
+  {
+    id: 'saumur',
+    categorie: 'patrimoine',
+    titre: 'Les cavaliers en noir',
+    texte:
+      "Dans cette ville de la Loire, l'école de cavalerie forme des écuyers en tenue noire capables de faire réaliser à leurs chevaux des sauts spectaculaires.",
+    lieu: 'Saumur (Maine-et-Loire)',
+    revelation: "Le Cadre noir de Saumur est inscrit au patrimoine immatériel de l'UNESCO depuis 2011.",
+    lat: 47.26,
+    lon: -0.077,
+  },
+  {
+    id: 'angouleme',
+    categorie: 'patrimoine',
+    titre: 'La capitale des bulles',
+    texte:
+      "Chaque mois de janvier, cette ville perchée sur un éperon rocheux accueille le plus grand festival de bande dessinée d'Europe. Ses murs sont couverts de fresques.",
+    lieu: 'Angoulême (Charente)',
+    revelation: "Le festival international de la bande dessinée d'Angoulême existe depuis 1974.",
+    lat: 45.649,
+    lon: 0.156,
+  },
+  {
+    id: 'roubaix',
+    categorie: 'histoire',
+    titre: 'L\'enfer du Nord',
+    texte:
+      "Chaque printemps, une course cycliste traverse des chemins pavés boueux avant de se terminer sur un vieux vélodrome. Le vainqueur reçoit… un pavé.",
+    lieu: 'Roubaix (Nord)',
+    revelation: "Paris-Roubaix, créée en 1896, est l'une des courses cyclistes les plus difficiles au monde.",
+    lat: 50.68,
+    lon: 3.204,
+  },
+  {
+    id: 'corte',
+    categorie: 'histoire',
+    titre: 'La capitale de la Corse indépendante',
+    texte:
+      "De 1755 à 1769, cette citadelle de montagne est la capitale d'une Corse indépendante, dotée d'une constitution et d'une université.",
+    lieu: 'Corte (Haute-Corse)',
+    revelation: "Pascal Paoli fait de Corte sa capitale. L'université de Corse y a rouvert en 1981.",
+    lat: 42.306,
+    lon: 9.15,
+  },
+  {
+    id: 'millau',
+    categorie: 'patrimoine',
+    titre: 'Le pont dans les nuages',
+    texte:
+      "Ce viaduc à haubans franchit la vallée du Tarn. L'une de ses piles mesure 245 mètres, et son tablier se trouve parfois au-dessus de la mer de nuages.",
+    lieu: 'Viaduc de Millau (Aveyron)',
+    revelation: "Inauguré en 2004, le viaduc de Millau est le pont à haubans le plus haut du monde.",
+    lat: 44.077,
+    lon: 3.023,
+  },
+  {
+    id: 'fort-boyard',
+    categorie: 'patrimoine',
+    titre: 'Un fort qui ne servit jamais',
+    texte:
+      "Commencé sous Napoléon pour protéger l'arsenal de Rochefort, ce fort en pleine mer est achevé en 1857… alors que la portée des canons l'a rendu inutile.",
+    lieu: 'Fort Boyard (Charente-Maritime)',
+    revelation: "Le fort est devenu célèbre grâce au jeu télévisé qui y est tourné depuis 1990.",
+    lat: 45.999,
+    lon: -1.214,
+  },
+  {
+    id: 'avignon',
+    categorie: 'patrimoine',
+    titre: 'Quand les papes quittent Rome',
+    texte:
+      "Au XIVe siècle, sept papes successifs s'installent dans cette ville au bord du Rhône et y font bâtir le plus grand palais gothique du monde.",
+    lieu: 'Avignon (Vaucluse)',
+    revelation: "Le palais des Papes accueille chaque été une partie du festival de théâtre d'Avignon.",
+    lat: 43.951,
+    lon: 4.807,
+  },
+  {
+    id: 'futuroscope',
+    categorie: 'patrimoine',
+    titre: 'Un parc tourné vers l\'avenir',
+    texte:
+      "Ouvert en 1987 au milieu des champs, ce parc consacré à l'image et au futur se reconnaît à ses bâtiments en forme de cristal ou de cube.",
+    lieu: 'Futuroscope, Chasseneuil-du-Poitou (Vienne)',
+    revelation: "Le Futuroscope est né d'une initiative du département de la Vienne.",
+    lat: 46.669,
+    lon: 0.368,
   },
 ];

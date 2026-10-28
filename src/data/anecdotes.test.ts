@@ -1,10 +1,17 @@
 import { describe, expect, it } from 'vitest';
 import { MAP_VIEWBOX, project } from '../geo/projection';
-import { ANECDOTES } from './anecdotes';
+import { ANECDOTES, CATEGORIES, type Categorie } from './anecdotes';
+import { ROUNDS_PER_GAME } from '../game/config';
 
 describe('ANECDOTES', () => {
   it('has enough entries for a full game', () => {
-    expect(ANECDOTES.length).toBeGreaterThanOrEqual(5);
+    expect(ANECDOTES.length).toBeGreaterThanOrEqual(100);
+  });
+
+  it('has enough entries in every theme for a full game', () => {
+    for (const categorie of Object.keys(CATEGORIES) as Categorie[]) {
+      expect(ANECDOTES.filter((a) => a.categorie === categorie).length, categorie).toBeGreaterThanOrEqual(ROUNDS_PER_GAME * 3);
+    }
   });
 
   it('has unique ids', () => {
