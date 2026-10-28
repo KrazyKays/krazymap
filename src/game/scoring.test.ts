@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { MAX_POINTS_PER_ROUND } from './config';
-import { haversineKm, pointsForDistance } from './scoring';
+import { applyHints, haversineKm, pointsForDistance, rankFor, ratingFor } from './scoring';
 
 describe('haversineKm', () => {
   it('returns 0 for the same point', () => {
@@ -28,5 +28,24 @@ describe('pointsForDistance', () => {
     const p = pointsForDistance(900);
     expect(Number.isInteger(p)).toBe(true);
     expect(p).toBeGreaterThanOrEqual(0);
+  });
+});
+
+describe('applyHints', () => {
+  it('reduces points with each hint', () => {
+    expect(applyHints(5000, 0)).toBe(5000);
+    expect(applyHints(5000, 1)).toBeLessThan(5000);
+    expect(applyHints(5000, 2)).toBeLessThan(applyHints(5000, 1));
+  });
+});
+
+describe('ratingFor and rankFor', () => {
+  it('rates a perfect round and a miss', () => {
+    expect(ratingFor(MAX_POINTS_PER_ROUND).tone).toBe('perfect');
+    expect(ratingFor(0).tone).toBe('miss');
+  });
+
+  it('gives a better rank for a better score', () => {
+    expect(rankFor(25000, 25000)).not.toBe(rankFor(0, 25000));
   });
 });
